@@ -1,9 +1,9 @@
-CREATE DATABASE gotta-taste;
+CREATE DATABASE gotta_taste;
 
-\c gottat-taste;
+\c gottat_taste;
 
 CREATE TABLE gotta_taste_user (
-    id_user INT PRIMARY KEY AUTO_INCREMENT,
+    id_user SERIAL PRIMARY KEY,
     firstname VARCHAR(100) NOT NULL,
     lastname VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
@@ -11,23 +11,24 @@ CREATE TABLE gotta_taste_user (
 );
 
 CREATE TABLE category (
-    id_category INT PRIMARY KEY AUTO_INCREMENT,
+    id_category SERIAL PRIMARY KEY,
     category_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE recipe (
-    id_recipe INT PRIMARY KEY AUTO_INCREMENT,
+    id_recipe SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     recipe_description TEXT,
     id_category INT NOT NULL,
     cook_time TIME NOT NULL,
     created_by VARCHAR(255) NOT NULL,
-    created_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_date DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_category) REFERENCES category(id_category)
 );
 
+
 CREATE TABLE ingredient (
-    id_ingredient INT PRIMARY KEY AUTO_INCREMENT,
+    id_ingredient SERIAL PRIMARY KEY,
     ingredient_name VARCHAR(255) NOT NULL,
     unit VARCHAR(50) NOT NULL -- For example, grams, milliliters, teaspoons, etc.
 );
@@ -42,7 +43,7 @@ CREATE TABLE recipe_ingredient (
 );
 
 CREATE TABLE step (
-    id_step INT PRIMARY KEY AUTO_INCREMENT,
+    id_step SERIAL PRIMARY KEY,
     id_recipe INT NOT NULL,
     step_number INT NOT NULL UNIQUE,
     instruction TEXT NOT NULL,
