@@ -45,6 +45,6 @@ CREATE TABLE step (
     id_step INT PRIMARY KEY AUTO_INCREMENT,
     id_recipe INT NOT NULL,
     step_number INT NOT NULL UNIQUE,
-    snstruction TEXT NOT NULL,
+    instruction TEXT NOT NULL,
     FOREIGN KEY (id_recipe) REFERENCES recipe(id_recipe)
 );
