@@ -12,32 +12,32 @@
 - [x] Fill tables with realistic data
 
 ## DAO
-### UserDAO
+### User
 - [ ] Method create
 - [ ] Method findByEmail
 
-### CategoryDAO
+### Category
 - [ ] Method all
 - [ ] Method find
 - [ ] Method create
 - [ ] Method update
 - [ ] Method delete
 
-### RecipeDAO
+### Recipe
 - [ ] Method all
 - [ ] Method find
 - [ ] Method create
 - [ ] Method update
 - [ ] Method delete
 
-### StepDAO
+### Step
 - [ ] Method all
 - [ ] Method find
 - [ ] Method create
 - [ ] Method update
 - [ ] Method delete
 
-### RecipeIngredientDAO
+### RecipeIngredient
 - [ ] Method all
 - [ ] Method find
 - [ ] Method create
