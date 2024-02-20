@@ -5,29 +5,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class Ingredient {
-
+public class Category {
+    
     private int id;
     private String name;
-    private String unit;
 
-    public Ingredient(int id) {
+    public Category(int id) {
         this.id = id;
     }
 
-    public Ingredient(String name, String unit) {
+    public Category(String name) {
         this.name = name;
-        this.unit = unit;
     }
 
-    public Ingredient(int id, String name, String unit) {
+    public Category(int id, String name) {
         this.id = id;
         this.name = name;
-        this.unit = unit;
     }
 
-    public static ArrayList<Ingredient> all() throws Exception {
-        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+    public static ArrayList<Category> all() throws Exception {
+        ArrayList<Category> categories = new ArrayList<Category>();
 
         Connection connection = null;
         PreparedStatement statement = null;
@@ -36,20 +33,18 @@ public class Ingredient {
         try {
             connection = DBConnection.getPostgesConnection();
             statement = connection.prepareStatement(
-                "SELECT * FROM ingredient"
+                "SELECT * FROM category"
             );
             resultSet = statement.executeQuery();
 
             int id;
             String name;
-            String unit;
             while (resultSet.next()) {
-                id = resultSet.getInt("id_ingredient");
-                name = resultSet.getString("ingredient_name");
-                unit = resultSet.getString("unit");
+                id = resultSet.getInt("id_category");
+                name = resultSet.getString("category_name");
 
-                ingredients.add(
-                    new Ingredient(id, name, unit)
+                categories.add(
+                    new Category(id, name)
                 );
             }
         } catch (Exception e) {
@@ -60,7 +55,7 @@ public class Ingredient {
             connection.close();
         }
 
-        return ingredients;
+        return categories;
     }
 
     public void find() throws Exception {
@@ -71,15 +66,14 @@ public class Ingredient {
         try {
             connection = DBConnection.getPostgesConnection();
             statement = connection.prepareStatement(
-                "SELECT * FROM ingredient"
-                + " WHERE id_ingredient = ?"
+                "SELECT * FROM category"
+                + " WHERE id_category = ?"
             );
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                name = resultSet.getString("ingredient_name");
-                unit = resultSet.getString("unit");
+                name = resultSet.getString("category_name");
             }
         } catch (Exception e) {
             throw e;
@@ -97,11 +91,10 @@ public class Ingredient {
             connection = DBConnection.getPostgesConnection();
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(
-                "INSERT INTO ingredient(ingredient_name, unit)"
-                + " VALUES (?, ?)"
+                "INSERT INTO category(category_name)"
+                + " VALUES (?)"
             );
             statement.setString(1, name);
-            statement.setString(2, unit);
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
@@ -120,13 +113,12 @@ public class Ingredient {
             connection = DBConnection.getPostgesConnection();
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(
-                "UPDATE ingredient"
-                + " SET ingredient_name = ?, unit = ?"
+                "UPDATE category"
+                + " SET category_name = ?"
                 + " WHERE id_ingredient = ?"
             );
             statement.setString(1, name);
-            statement.setString(2, unit);
-            statement.setInt(3, id);
+            statement.setInt(2, id);
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
@@ -145,8 +137,8 @@ public class Ingredient {
             connection = DBConnection.getPostgesConnection();
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(
-                "DELETE FROM ingredient"
-                + " WHERE id_ingredient = ?"
+                "DELETE FROM category"
+                + " WHERE id_category = ?"
             );
             statement.setInt(1, id);
             statement.executeUpdate();
@@ -159,34 +151,26 @@ public class Ingredient {
             connection.close();
         }
     }
-
+    
     public int getId() {
         return id;
     }
-
+    
     public void setId(int id) {
         this.id = id;
     }
-
+    
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
     @Override
     public String toString() {
-        return "Ingredient [id=" + id + ", name=" + name + ", unit=" + unit + "]";
+        return "Category [id=" + id + ", name=" + name + "]";
     }
-  
+
 }
