@@ -13,8 +13,8 @@
 
 ## DAO
 ### User
-- [ ] Method create
-- [ ] Method findByEmail
+- [x] Method create
+- [ ] Method findByEmailAndPassword
 
 ### Category
 - [ ] Method all

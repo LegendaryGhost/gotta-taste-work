@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.ResultSet;
 
 public class User {
 
@@ -15,6 +15,11 @@ public class User {
     private String password;
     private String hashedPassword;
 
+    public User(String email, String password) {
+        this.email = email;
+        setPassword(password);
+    }
+
     public User(String firstname, String lastname, String email, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
@@ -22,9 +27,11 @@ public class User {
         setPassword(password);
     }
 
-    public void create(Connection connection) throws SQLException {
+    public void create() throws Exception {
+        Connection connection = null;
         PreparedStatement statement = null;
         try {
+            connection = DBConnection.getPostgesConnection();
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(
                 "INSERT INTO gotta_taste_user(firstname, lastname, email, user_password)"
@@ -40,6 +47,35 @@ public class User {
             connection.rollback();
             throw e;
         } finally {
+            statement.close();
+            connection.close();
+        }
+    }
+
+    public void findByEmailAndPassword() throws Exception {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getPostgesConnection();
+            statement = connection.prepareStatement(
+                "SELECT * FROM gotta_taste_user"
+                + " WHERE email = ? AND user_password = ?"
+            );
+            statement.setString(1, email);
+            statement.setString(2, hashedPassword);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                id = resultSet.getInt("id_user");
+                firstname = resultSet.getString("firstname");
+                lastname = resultSet.getString("lastname");
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            resultSet.close();
             statement.close();
             connection.close();
         }
@@ -106,6 +142,12 @@ public class User {
 
     public String getHashedPassword() {
         return hashedPassword;
+    }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
+                + ", password=" + password + ", hashedPassword=" + hashedPassword + "]";
     }
 
 }
