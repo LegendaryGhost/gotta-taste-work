@@ -1,11 +1,11 @@
-import dao.User;
+import dao.Ingredient;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        User tiarintsoa = new User("tiarintsoa@gmail.com", "12345678");
-        tiarintsoa.findByEmailAndPassword();
-        System.out.println(tiarintsoa);
+        for (Ingredient ingredient : Ingredient.all()) {
+            System.out.println(ingredient);
+        }
     }
     
 }
