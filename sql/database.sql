@@ -1,6 +1,6 @@
 CREATE DATABASE gotta_taste;
 
-\c gottat_taste;
+\c gotta_taste;
 
 CREATE TABLE gotta_taste_user (
     id_user SERIAL PRIMARY KEY,
@@ -45,7 +45,7 @@ CREATE TABLE recipe_ingredient (
 CREATE TABLE step (
     id_step SERIAL PRIMARY KEY,
     id_recipe INT NOT NULL,
-    step_number INT NOT NULL UNIQUE,
+    step_number INT NOT NULL,
     instruction TEXT NOT NULL,
     FOREIGN KEY (id_recipe) REFERENCES recipe(id_recipe)
 );
