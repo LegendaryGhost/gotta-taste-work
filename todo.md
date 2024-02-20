@@ -31,11 +31,11 @@
 - [ ] Method delete
 
 ### Step
-- [ ] Method all
-- [ ] Method find
-- [ ] Method create
-- [ ] Method update
-- [ ] Method delete
+- [x] Method all
+- [x] Method find
+- [x] Method create
+- [x] Method update
+- [x] Method delete
 
 ### Ingredient
 - [x] Method all
