@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catégorie de recette</title>
+    <title>Etapes</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
@@ -114,7 +114,7 @@
                     </li>
                     
                     <!-- Category -->
-                    <li class="menu-item active">
+                    <li class="menu-item">
                         <a href="category.html" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Categories">Catégories</div>
@@ -130,7 +130,7 @@
                     </li>
 
                     <!-- Step -->
-                    <li class="menu-item">
+                    <li class="menu-item active">
                         <a href="step.html" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Steps">Etapes</div>
@@ -213,24 +213,27 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gotta taste /</span> Catégories de recette</h4>
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gotta taste /</span> Etapes des recettes</h4>
 
                         <!-- Basic Bootstrap Table -->
                         <div class="card">
-                            <h5 class="card-header">Liste des catégories</h5>
+                            <h5 class="card-header">Liste des étapes</h5>
                             <div class="table-responsive text-nowrap" style="overflow-x: visible;">
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nom</th>
-                                        <th>Actions</th>
+                                        <th>ID Recette</th>
+                                        <th>Numéro d'étape</th>
+                                        <th>Instruction</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
                                     <tr>
                                         <td><strong>1</strong></td>
-                                        <td>Albert Cook</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>Lorem ipsum dolor...</td>
                                         <td>
                                             <div class="dropdown">
                                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -251,7 +254,9 @@
                                     </tr>
                                     <tr>
                                         <td><strong>2</strong></td>
-                                        <td>Albert Cook</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>Lorem ipsum dolor...</td>
                                         <td>
                                             <div class="dropdown">
                                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
