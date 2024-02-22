@@ -115,7 +115,7 @@ public class Category {
             statement = connection.prepareStatement(
                 "UPDATE category"
                 + " SET category_name = ?"
-                + " WHERE id_ingredient = ?"
+                + " WHERE id_category = ?"
             );
             statement.setString(1, name);
             statement.setInt(2, id);

@@ -26,7 +26,6 @@ CREATE TABLE recipe (
     FOREIGN KEY (id_category) REFERENCES category(id_category)
 );
 
-
 CREATE TABLE ingredient (
     id_ingredient SERIAL PRIMARY KEY,
     ingredient_name VARCHAR(255) NOT NULL,
