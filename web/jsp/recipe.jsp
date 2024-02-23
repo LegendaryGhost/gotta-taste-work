@@ -1,9 +1,11 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="dao.Recipe, java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catégorie de recette</title>
+    <title>Recette</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
@@ -102,11 +104,11 @@
                   </div>
                 <!-- / App brand -->
 
-              <div class="menu-inner-shadow"></div>
+                <div class="menu-inner-shadow"></div>
 
-              <ul class="menu-inner py-1">
+                <ul class="menu-inner py-1">
                     <!-- Recipe -->
-                    <li class="menu-item">
+                    <li class="menu-item active">
                         <a href="recipe.html" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Recipies">Recettes</div>
@@ -114,7 +116,7 @@
                     </li>
                     
                     <!-- Category -->
-                    <li class="menu-item active">
+                    <li class="menu-item">
                         <a href="category.html" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Categories">Catégories</div>
@@ -136,7 +138,7 @@
                             <div data-i18n="Steps">Etapes</div>
                         </a>
                     </li>
-              </ul>
+                </ul>
             </aside>
 
             <!-- Layout container -->
@@ -213,64 +215,59 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gotta taste /</span> Catégories de recette</h4>
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gotta taste /</span> Recettes</h4>
 
                         <!-- Basic Bootstrap Table -->
                         <div class="card">
-                            <h5 class="card-header">Liste des catégories</h5>
+                            <h5 class="card-header">Liste des recettes</h5>
                             <div class="card-body"><a href="#" type="button" class="btn btn-success">Ajouter</a></div>
                             <div class="table-responsive text-nowrap" style="overflow-x: visible;">
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Nom</th>
+                                            <th>Titre</th>
+                                            <th>Description</th>
+                                            <th>ID Catégorie</th>
+                                            <th>Temps de préparation</th>
+                                            <th>Créée par</th>
+                                            <th>Date de création</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        <tr>
-                                            <td><strong>1</strong></td>
-                                            <td>Albert Cook</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="javascript:void(0);">
-                                                            <i class="bx bx-edit-alt me-1"></i>
-                                                            Modifier
-                                                        </a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">
-                                                            <i class="bx bx-trash me-1"></i>
-                                                            Supprimer
-                                                        </a>
+                                        <% for(Recipe recipe : (ArrayList<Recipe>)request.getAttribute("recipes")) { %>
+                                            <tr>
+                                                <td><strong><%= recipe.getId() %></strong></td>
+                                                <td><%= recipe.getTitle() %></td>
+                                                <td><%= recipe.getDescriptionExcerpt() %></td>
+                                                <td><%= recipe.getIdCategory() %></td>
+                                                <td><%= recipe.getFormattedCookTime() %></td>
+                                                <td><%= recipe.getCreatedBy() %></td>
+                                                <td><%= recipe.getFormattedCreatedDate() %></td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="#">
+                                                                <i class="bx bx-edit-alt me-1"></i>
+                                                                Détails
+                                                            </a>
+                                                            <a class="dropdown-item" href="#">
+                                                                <i class="bx bx-edit-alt me-1"></i>
+                                                                Modifier
+                                                            </a>
+                                                            <a class="dropdown-item" href="#">
+                                                                <i class="bx bx-trash me-1"></i>
+                                                                Supprimer
+                                                            </a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>2</strong></td>
-                                            <td>Albert Cook</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="javascript:void(0);">
-                                                            <i class="bx bx-edit-alt me-1"></i>
-                                                            Modifier
-                                                        </a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">
-                                                            <i class="bx bx-trash me-1"></i>
-                                                            Supprimer
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
+                                        <% } %>
                                     </tbody>
                                 </table>
                             </div>

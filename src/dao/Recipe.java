@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Recipe {
@@ -17,6 +18,9 @@ public class Recipe {
     private LocalTime cookTime;
     private String createdBy;
     private LocalDate createdDate;
+
+    private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public Recipe(int id) {
         this.id = id;
@@ -217,6 +221,10 @@ public class Recipe {
     public String getDescription() {
         return description;
     }
+
+    public String getDescriptionExcerpt() {
+        return description.length() < 21 ? description : description.substring(0, 21) + "...";
+    }
     
     public void setDescription(String description) {
         this.description = description;
@@ -233,6 +241,10 @@ public class Recipe {
     public LocalTime getCookTime() {
         return cookTime;
     }
+
+    public String getFormattedCookTime() {
+        return cookTime.format(timeFormatter);
+    }
     
     public void setCookTime(LocalTime cookTime) {
         this.cookTime = cookTime;
@@ -248,6 +260,10 @@ public class Recipe {
     
     public LocalDate getCreatedDate() {
         return createdDate;
+    }
+    
+    public String getFormattedCreatedDate() {
+        return createdDate.format(dateFormatter);
     }
     
     public void setCreatedDate(LocalDate createdDate) {

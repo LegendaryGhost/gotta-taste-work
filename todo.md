@@ -76,7 +76,7 @@
 
 ### RecipeServlet
 - [ ] GET:
-    - [ ] Show recipe list
+    - [x] Show recipe list
     - [ ] Delete a recipe
 - [ ] POSt:
     - [ ] Add a new recipe
@@ -106,6 +106,9 @@
 
 # Front-end
 ## HTML
+### Login
+- [x] Login form
+
 ### Category
 - [ ] Category table
 - [ ] Category form
@@ -115,7 +118,7 @@
 - [ ] Ingredient form
 
 ### Recipe
-- [ ] Recipe table
+- [x] Recipe table
 - [ ] Recipe form
 
 ### Step
