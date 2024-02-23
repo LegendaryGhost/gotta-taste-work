@@ -56,7 +56,7 @@
     - [ ] Add a new category
     - [ ] Update a category
 
-### CategoryFormServlet
+### FormCategoryServlet
 - [ ] GET:
     - [ ] Add action: give an empty form
     - [ ] Update action: fill the form with the data to update
@@ -69,23 +69,23 @@
     - [ ] Add a new ingredient
     - [ ] Update a ingredient
 
-### IngredientFormServlet
+### FormIngredientServlet
 - [ ] GET:
     - [ ] Add action: give an empty form
     - [ ] Update action: fill the form with the data to update
 
 ### RecipeServlet
-- [ ] GET:
+- [x] GET:
     - [x] Show recipe list
-    - [ ] Delete a recipe
-- [ ] POSt:
-    - [ ] Add a new recipe
-    - [ ] Update a recipe
+    - [x] Delete a recipe
+- [x] POSt:
+    - [x] Add a new recipe
+    - [x] Update a recipe
 
-### RecipeFormServlet
-- [ ] GET:
-    - [ ] Add action: give an empty form
-    - [ ] Update action: fill the form with the data to update
+### FormRecipeServlet
+- [x] GET:
+    - [x] Add action: give an empty form
+    - [x] Update action: fill the form with the data to update
 
 ### StepServlet
 - [ ] GET:
@@ -95,13 +95,13 @@
     - [ ] Add a new step
     - [ ] Update a step
 
-### StepFormServlet
+### FormStepServlet
 - [ ] GET:
     - [ ] Add action: give an empty form
     - [ ] Update action: fill the form with the data to update
 
 ### XML webapp
-- [ ] Configure the web.xml file
+- [x] Configure the web.xml file
 - [ ] Add servlets into web.xml
 
 # Front-end
@@ -119,7 +119,7 @@
 
 ### Recipe
 - [x] Recipe table
-- [ ] Recipe form
+- [x] Recipe form
 
 ### Step
 - [ ] Step table
@@ -131,7 +131,7 @@
     - [ ] Category form
     - [ ] Ingredient table
     - [ ] Ingredient form
-    - [ ] Recipe table
-    - [ ] Recipe form
+    - [x] Recipe table
+    - [x] Recipe form
     - [ ] Steps table
     - [ ] Steps form

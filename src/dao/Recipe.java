@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -12,15 +13,17 @@ import java.util.ArrayList;
 public class Recipe {
     
     private int id;
-    private String title;
-    private String description;
-    private int idCategory;
-    private LocalTime cookTime;
-    private String createdBy;
-    private LocalDate createdDate;
+    private String title = "";
+    private String description = "";
+    private int idCategory = 1;
+    private LocalTime cookTime = LocalTime.of(0, 0, 0);
+    private String createdBy = "";
+    private LocalDate createdDate = LocalDate.now();
 
-    private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    public Recipe() {}
 
     public Recipe(int id) {
         this.id = id;
@@ -137,7 +140,7 @@ public class Recipe {
             statement.setString(1, title);
             statement.setString(2, description);
             statement.setInt(3, idCategory);
-            statement.setDate(4, Date.valueOf(createdDate));
+            statement.setTime(4, Time.valueOf(cookTime));
             statement.setString(5, createdBy);
             statement.setDate(6, Date.valueOf(createdDate));
             statement.executeUpdate();
@@ -165,7 +168,7 @@ public class Recipe {
             statement.setString(1, title);
             statement.setString(2, description);
             statement.setInt(3, idCategory);
-            statement.setDate(4, Date.valueOf(createdDate));
+            statement.setTime(4, Time.valueOf(cookTime));
             statement.setString(5, createdBy);
             statement.setDate(6, Date.valueOf(createdDate));
             statement.setInt(7, id);

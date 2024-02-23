@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="dao.Recipe, java.util.ArrayList" %>
+<%@ page import="dao.Recipe, dao.Category, java.util.ArrayList" %>
+<% Recipe recipe = (Recipe)request.getAttribute("recipe"); %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,9 +105,9 @@
                   </div>
                 <!-- / App brand -->
 
-                <div class="menu-inner-shadow"></div>
+              <div class="menu-inner-shadow"></div>
 
-                <ul class="menu-inner py-1">
+              <ul class="menu-inner py-1">
                     <!-- Recipe -->
                     <li class="menu-item active">
                         <a href="recipe.html" class="menu-link">
@@ -138,7 +139,7 @@
                             <div data-i18n="Steps">Etapes</div>
                         </a>
                     </li>
-                </ul>
+              </ul>
             </aside>
 
             <!-- Layout container -->
@@ -215,64 +216,67 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gotta taste /</span> Recettes</h4>
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Formulaire /</span> Recette</h4>
 
-                        <!-- Basic Bootstrap Table -->
-                        <div class="card">
-                            <h5 class="card-header">Liste des recettes</h5>
-                            <div class="card-body"><a href="form-recipe" type="button" class="btn btn-success">Ajouter</a></div>
-                            <div class="table-responsive text-nowrap" style="overflow-x: visible;">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Titre</th>
-                                            <th>Description</th>
-                                            <th>ID Catégorie</th>
-                                            <th>Temps de préparation</th>
-                                            <th>Créée par</th>
-                                            <th>Date de création</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-border-bottom-0">
-                                        <% for(Recipe recipe : (ArrayList<Recipe>)request.getAttribute("recipes")) { %>
-                                            <tr>
-                                                <td><strong><%= recipe.getId() %></strong></td>
-                                                <td><%= recipe.getTitle() %></td>
-                                                <td><%= recipe.getDescriptionExcerpt() %></td>
-                                                <td><%= recipe.getIdCategory() %></td>
-                                                <td><%= recipe.getFormattedCookTime() %></td>
-                                                <td><%= recipe.getCreatedBy() %></td>
-                                                <td><%= recipe.getFormattedCreatedDate() %></td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#">
-                                                                <i class="bx bx-edit-alt me-1"></i>
-                                                                Détails
-                                                            </a>
-                                                            <a class="dropdown-item" href="form-recipe?action=update&id=<%= recipe.getId() %>">
-                                                                <i class="bx bx-edit-alt me-1"></i>
-                                                                Modifier
-                                                            </a>
-                                                            <a class="dropdown-item" href="recipe?action=delete&id=<%= recipe.getId() %>">
-                                                                <i class="bx bx-trash me-1"></i>
-                                                                Supprimer
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        <% } %>
-                                    </tbody>
-                                </table>
+                        <div class="row">
+                            <div class="col-lg-6 mx-auto">
+                                <div class="card mb-4">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">Recette</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form
+                                          method="POST"
+                                          action="recipe"
+                                        >
+                                            <input type="hidden" name="action" value="<%= request.getAttribute("action") %>">
+                                            <input type="hidden" name="idRecipe" value="<%= recipe.getId() %>">
+                                            <div class="mb-3">
+                                              <label class="form-label" for="recipeTitle">Titre</label>
+                                              <input value="<%= recipe.getTitle() %>" name="recipeTitle" type="text" class="form-control" id="recipeTitle" placeholder="Titre" />
+                                            </div>
+                                            <div class="mb-3">
+                                              <label for="recipeDescription" class="form-label">Description</label>
+                                              <textarea name="recipeDescription" class="form-control" id="recipeDescription" rows="3"><%= recipe.getDescription() %></textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                              <label for="recipeIdCategory" class="form-label">Catégorie</label>
+                                              <select name="recipeIdCategory" id="recipeIdCategory" class="form-select">
+                                                <%  for(Category category : (ArrayList<Category>)request.getAttribute("categories")) { %>
+                                                  <option
+                                                    value="<%= category.getId() %>"
+                                                    <% if(category.getId() == recipe.getIdCategory()) out.println("selected"); %>
+                                                  >
+                                                    <%= category.getName() %>
+                                                  </option>
+                                                <% } %>
+                                              </select>
+                                            </div>
+                                            <div class="mb-3">
+                                              <div class="d-flex justify-content-between">
+                                                <label for="recipeCookTime" class="form-label">Temps de préparation</label>
+                                                <small>heure:minute</small>
+                                              </div>
+                                              <input value="<%= recipe.getFormattedCookTime() %>" name="recipeCookTime" class="form-control" type="time" id="recipeCookTime">
+                                            </div>
+                                            <div class="mb-3">
+                                              <label class="form-label" for="recipeCreator">Créé par</label>
+                                              <input value="<%= recipe.getCreatedBy() %>" name="recipeCreator" type="text" class="form-control" id="recipeCreator" placeholder="Nom du créateur" />
+                                            </div>
+                                            <div class="mb-3">
+                                              <label class="form-label" for="recipeCreationDate">Date de création</label>
+                                              <input value="<%= recipe.getFormattedCreatedDate() %>" name="recipeCreationDate" type="date" class="form-control" id="recipeCreationDate" />
+                                            </div>
+                                            <% if(request.getAttribute("action").equals("create")) { %>
+                                              <button type="submit" class="btn btn-success">Ajouter</button>
+                                            <% } else { %>
+                                              <button type="submit" class="btn btn-primary">Modifier</button>
+                                            <% } %>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!--/ Basic Bootstrap Table -->
                     </div>
                     <!-- / Content -->
                 </div>

@@ -34,11 +34,21 @@
     <servlet-name>RecipeServlet</servlet-name>
   </servlet>
 
+  <servlet>
+    <servlet-class>servlet.FormRecipeServlet</servlet-class>
+    <servlet-name>FormRecipeServlet</servlet-name>
+  </servlet>
+
 
   <!-- Servlet mapping -->
   <servlet-mapping>
     <servlet-name>RecipeServlet</servlet-name>
     <url-pattern>/recipe</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>FormRecipeServlet</servlet-name>
+    <url-pattern>/form-recipe</url-pattern>
   </servlet-mapping>
  
 </web-app>
