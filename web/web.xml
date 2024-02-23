@@ -49,6 +49,16 @@
     <servlet-name>FormCategoryServlet</servlet-name>
   </servlet>
 
+  <servlet>
+    <servlet-class>servlet.IngredientServlet</servlet-class>
+    <servlet-name>IngredientServlet</servlet-name>
+  </servlet>
+
+  <servlet>
+    <servlet-class>servlet.FormIngredientServlet</servlet-class>
+    <servlet-name>FormIngredientServlet</servlet-name>
+  </servlet>
+
 
   <!-- Servlet mapping -->
   <servlet-mapping>
@@ -69,6 +79,16 @@
   <servlet-mapping>
     <servlet-name>FormCategoryServlet</servlet-name>
     <url-pattern>/form-category</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>IngredientServlet</servlet-name>
+    <url-pattern>/ingredient</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>FormIngredientServlet</servlet-name>
+    <url-pattern>/form-ingredient</url-pattern>
   </servlet-mapping>
  
 </web-app>

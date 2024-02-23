@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class Ingredient {
 
     private int id;
-    private String name;
-    private String unit;
+    private String name = "";
+    private String unit = "";
 
     public Ingredient(int id) {
         this.id = id;
@@ -24,6 +24,10 @@ public class Ingredient {
         this.id = id;
         this.name = name;
         this.unit = unit;
+    }
+
+    public Ingredient() {
+        //TODO Auto-generated constructor stub
     }
 
     public static ArrayList<Ingredient> all() throws Exception {

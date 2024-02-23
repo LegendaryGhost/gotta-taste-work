@@ -62,17 +62,17 @@
     - [x] Update action: fill the form with the data to update
 
 ### IngredientServlet
-- [ ] GET:
-    - [ ] Show ingredient list
-    - [ ] Delete a ingredient
-- [ ] POSt:
-    - [ ] Add a new ingredient
-    - [ ] Update a ingredient
+- [x] GET:
+    - [x] Show ingredient list
+    - [x] Delete a ingredient
+- [x] POSt:
+    - [x] Add a new ingredient
+    - [x] Update a ingredient
 
 ### FormIngredientServlet
-- [ ] GET:
-    - [ ] Add action: give an empty form
-    - [ ] Update action: fill the form with the data to update
+- [x] GET:
+    - [x] Add action: give an empty form
+    - [x] Update action: fill the form with the data to update
 
 ### RecipeServlet
 - [x] GET:
@@ -129,8 +129,8 @@
 - [ ] Convert HTML to JSP
     - [x] Category table
     - [x] Category form
-    - [ ] Ingredient table
-    - [ ] Ingredient form
+    - [x] Ingredient table
+    - [x] Ingredient form
     - [x] Recipe table
     - [x] Recipe form
     - [ ] Steps table
