@@ -40,7 +40,7 @@
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <!-- App brand -->
                 <div class="app-brand demo">
-                    <a href="recipe.html" class="app-brand-link">
+                    <a href="recipe" class="app-brand-link">
                       <span class="app-brand-logo demo">
                         <svg
                           width="25"
@@ -110,7 +110,7 @@
               <ul class="menu-inner py-1">
                     <!-- Recipe -->
                     <li class="menu-item active">
-                        <a href="recipe.html" class="menu-link">
+                        <a href="recipe" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Recipies">Recettes</div>
                         </a>
@@ -118,7 +118,7 @@
                     
                     <!-- Category -->
                     <li class="menu-item">
-                        <a href="category.html" class="menu-link">
+                        <a href="category" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Categories">Catégories</div>
                         </a>
@@ -126,7 +126,7 @@
 
                     <!-- Ingredient -->
                     <li class="menu-item">
-                        <a href="ingredient.html" class="menu-link">
+                        <a href="ingredient" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Ingredients">Ingrédients</div>
                         </a>
@@ -134,7 +134,7 @@
 
                     <!-- Step -->
                     <li class="menu-item">
-                        <a href="step.html" class="menu-link">
+                        <a href="step" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Steps">Etapes</div>
                         </a>

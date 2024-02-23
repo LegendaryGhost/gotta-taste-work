@@ -8,7 +8,9 @@ import java.util.ArrayList;
 public class Category {
     
     private int id;
-    private String name;
+    private String name = "";
+
+    public Category() {}
 
     public Category(int id) {
         this.id = id;

@@ -1,9 +1,12 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="dao.Category" %>
+<% Category category = (Category)request.getAttribute("category"); %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingrédient</title>
+    <title>Catégorie de recette</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
@@ -114,7 +117,7 @@
                     </li>
                     
                     <!-- Category -->
-                    <li class="menu-item">
+                    <li class="menu-item active">
                         <a href="category" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Categories">Catégories</div>
@@ -122,7 +125,7 @@
                     </li>
 
                     <!-- Ingredient -->
-                    <li class="menu-item active">
+                    <li class="menu-item">
                         <a href="ingredient" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Ingredients">Ingrédients</div>
@@ -213,26 +216,27 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Formulaire /</span> Ingredient</h4>
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Formulaire /</span> Catégories de recette</h4>
 
                         <div class="row">
                             <div class="col-lg-6 mx-auto">
                                 <div class="card mb-4">
                                     <div class="card-header d-flex justify-content-between align-items-center">
-                                        <h5 class="mb-0">Ingrédient</h5>
+                                        <h5 class="mb-0">Catégorie</h5>
                                     </div>
                                     <div class="card-body">
-                                        <form>
-                                            <input type="hidden" name="idIngredient" value="0">
+                                        <form method="POST" action="category">
+                                            <input type="hidden" name="action" value="<%= request.getAttribute("action") %>">
+                                            <input type="hidden" name="idCategory" value="<%= category.getId() %>">
                                             <div class="mb-3">
-                                                <label class="form-label" for="ingredientName">Nom</label>
-                                                <input name="ingredientName" type="text" class="form-control" id="ingredientName" placeholder="Nom de la catégorie" />
+                                                <label class="form-label" for="categoryName">Nom</label>
+                                                <input value="<%= category.getName() %>" name="categoryName" type="text" class="form-control" id="categoryName" placeholder="Nom de la catégorie" />
                                             </div>
-                                            <div class="mb-3">
-                                                <label class="form-label" for="ingredientUnit">Unité de mesure</label>
-                                                <input name="ingredientUnit" type="text" class="form-control" id="ingredientUnit" placeholder="Unité de mesure" />
-                                            </div>
-                                            <button type="submit" class="btn btn-success">Ajouter</button>
+                                            <% if(request.getAttribute("action").equals("create")) { %>
+                                              <button type="submit" class="btn btn-success">Ajouter</button>
+                                            <% } else { %>
+                                              <button type="submit" class="btn btn-primary">Modifier</button>
+                                            <% } %>
                                         </form>
                                     </div>
                                 </div>

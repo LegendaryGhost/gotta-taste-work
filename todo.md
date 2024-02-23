@@ -49,17 +49,17 @@
 - [ ] GET: Allow users to login
 
 ### CategoryServlet
-- [ ] GET:
-    - [ ] Show category list
-    - [ ] Delete a category
-- [ ] POSt:
-    - [ ] Add a new category
-    - [ ] Update a category
+- [x] GET:
+    - [x] Show category list
+    - [x] Delete a category
+- [x] POSt:
+    - [x] Add a new category
+    - [x] Update a category
 
 ### FormCategoryServlet
-- [ ] GET:
-    - [ ] Add action: give an empty form
-    - [ ] Update action: fill the form with the data to update
+- [x] GET:
+    - [x] Add action: give an empty form
+    - [x] Update action: fill the form with the data to update
 
 ### IngredientServlet
 - [ ] GET:
@@ -110,25 +110,25 @@
 - [x] Login form
 
 ### Category
-- [ ] Category table
-- [ ] Category form
+- [x] Category table
+- [x] Category form
 
 ### Ingredient
-- [ ] Ingredient table
-- [ ] Ingredient form
+- [x] Ingredient table
+- [x] Ingredient form
 
 ### Recipe
 - [x] Recipe table
 - [x] Recipe form
 
 ### Step
-- [ ] Step table
-- [ ] Step form
+- [x] Step table
+- [x] Step form
 
 ## JSP (Java Server Pages)
 - [ ] Convert HTML to JSP
-    - [ ] Category table
-    - [ ] Category form
+    - [x] Category table
+    - [x] Category form
     - [ ] Ingredient table
     - [ ] Ingredient form
     - [x] Recipe table

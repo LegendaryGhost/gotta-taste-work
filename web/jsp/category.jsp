@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="dao.Category, java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +39,7 @@
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <!-- App brand -->
                 <div class="app-brand demo">
-                    <a href="recipe.html" class="app-brand-link">
+                    <a href="recipe" class="app-brand-link">
                       <span class="app-brand-logo demo">
                         <svg
                           width="25"
@@ -107,7 +109,7 @@
               <ul class="menu-inner py-1">
                     <!-- Recipe -->
                     <li class="menu-item">
-                        <a href="recipe.html" class="menu-link">
+                        <a href="recipe" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Recipies">Recettes</div>
                         </a>
@@ -115,7 +117,7 @@
                     
                     <!-- Category -->
                     <li class="menu-item active">
-                        <a href="category.html" class="menu-link">
+                        <a href="category" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Categories">Catégories</div>
                         </a>
@@ -123,7 +125,7 @@
 
                     <!-- Ingredient -->
                     <li class="menu-item">
-                        <a href="ingredient.html" class="menu-link">
+                        <a href="ingredient" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Ingredients">Ingrédients</div>
                         </a>
@@ -131,7 +133,7 @@
 
                     <!-- Step -->
                     <li class="menu-item">
-                        <a href="step.html" class="menu-link">
+                        <a href="step" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Steps">Etapes</div>
                         </a>
@@ -218,7 +220,7 @@
                         <!-- Basic Bootstrap Table -->
                         <div class="card">
                             <h5 class="card-header">Liste des catégories</h5>
-                            <div class="card-body"><a href="#" type="button" class="btn btn-success">Ajouter</a></div>
+                            <div class="card-body"><a href="form-category" type="button" class="btn btn-success">Ajouter</a></div>
                             <div class="table-responsive text-nowrap" style="overflow-x: visible;">
                                 <table class="table">
                                     <thead>
@@ -229,48 +231,29 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        <tr>
-                                            <td><strong>1</strong></td>
-                                            <td>Albert Cook</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="javascript:void(0);">
-                                                            <i class="bx bx-edit-alt me-1"></i>
-                                                            Modifier
-                                                        </a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">
-                                                            <i class="bx bx-trash me-1"></i>
-                                                            Supprimer
-                                                        </a>
+                                        <% for(Category category : (ArrayList<Category>)request.getAttribute("categories")) { %>
+                                            <tr>
+                                                <td><strong><%= category.getId() %></strong></td>
+                                                <td><%= category.getName() %></td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="form-category?action=update&id=<%= category.getId() %>">
+                                                                <i class="bx bx-edit-alt me-1"></i>
+                                                                Modifier
+                                                            </a>
+                                                            <a class="dropdown-item" href="category?action=delete&id=<%= category.getId() %>">
+                                                                <i class="bx bx-trash me-1"></i>
+                                                                Supprimer
+                                                            </a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>2</strong></td>
-                                            <td>Albert Cook</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="javascript:void(0);">
-                                                            <i class="bx bx-edit-alt me-1"></i>
-                                                            Modifier
-                                                        </a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">
-                                                            <i class="bx bx-trash me-1"></i>
-                                                            Supprimer
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
+                                        <% } %>
                                     </tbody>
                                 </table>
                             </div>
