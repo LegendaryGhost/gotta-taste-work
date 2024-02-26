@@ -88,21 +88,21 @@
     - [x] Update action: fill the form with the data to update
 
 ### StepServlet
-- [ ] GET:
-    - [ ] Show step list
-    - [ ] Delete a step
-- [ ] POSt:
-    - [ ] Add a new step
-    - [ ] Update a step
+- [x] GET:
+    - [x] Show step list
+    - [x] Delete a step
+- [x] POSt:
+    - [x] Add a new step
+    - [x] Update a step
 
 ### FormStepServlet
-- [ ] GET:
-    - [ ] Add action: give an empty form
-    - [ ] Update action: fill the form with the data to update
+- [x] GET:
+    - [x] Add action: give an empty form
+    - [x] Update action: fill the form with the data to update
 
 ### XML webapp
 - [x] Configure the web.xml file
-- [ ] Add servlets into web.xml
+- [x] Add servlets into web.xml
 
 # Front-end
 ## HTML
@@ -126,12 +126,12 @@
 - [x] Step form
 
 ## JSP (Java Server Pages)
-- [ ] Convert HTML to JSP
+- [x] Convert HTML to JSP
     - [x] Category table
     - [x] Category form
     - [x] Ingredient table
     - [x] Ingredient form
     - [x] Recipe table
     - [x] Recipe form
-    - [ ] Steps table
-    - [ ] Steps form
+    - [x] Steps table
+    - [x] Steps form

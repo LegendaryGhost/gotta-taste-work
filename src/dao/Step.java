@@ -8,9 +8,11 @@ import java.util.ArrayList;
 public class Step {
     
     private int id;
-    private int idRecipe;
-    private int number;
-    private String instruction;
+    private int idRecipe = 1;
+    private int number = 1;
+    private String instruction = "";
+
+    public Step() {}
 
     public Step(int id) {
         this.id = id;
@@ -194,6 +196,10 @@ public class Step {
     
     public String getInstruction() {
         return instruction;
+    }
+
+    public String getInstructionExcerpt() {
+        return instruction.length() < 21 ? instruction : instruction.substring(0, 21) + "...";
     }
     
     public void setInstruction(String instruction) {

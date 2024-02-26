@@ -59,6 +59,16 @@
     <servlet-name>FormIngredientServlet</servlet-name>
   </servlet>
 
+  <servlet>
+    <servlet-class>servlet.StepServlet</servlet-class>
+    <servlet-name>StepServlet</servlet-name>
+  </servlet>
+
+  <servlet>
+    <servlet-class>servlet.FormStepServlet</servlet-class>
+    <servlet-name>FormStepServlet</servlet-name>
+  </servlet>
+
 
   <!-- Servlet mapping -->
   <servlet-mapping>
@@ -89,6 +99,16 @@
   <servlet-mapping>
     <servlet-name>FormIngredientServlet</servlet-name>
     <url-pattern>/form-ingredient</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>StepServlet</servlet-name>
+    <url-pattern>/step</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>FormStepServlet</servlet-name>
+    <url-pattern>/form-step</url-pattern>
   </servlet-mapping>
  
 </web-app>
