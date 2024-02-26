@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="dao.Step, java.util.ArrayList" %>
+<%@ page import="dao.Step, java.util.ArrayList, util.SessionUtils" %>
+<% boolean connected = SessionUtils.isUserConnected(request); %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +25,7 @@
     <link rel="stylesheet" href="assets/vendor/libs/apex-charts/apex-charts.css" />
 
     <!-- Page CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <!-- Helpers -->
     <script src="assets/vendor/js/helpers.js"></script>
@@ -155,56 +157,12 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                        <!-- Search -->
-                        <div class="navbar-nav align-items-center">
-                            <div class="nav-item d-flex align-items-center">
-                                <i class="bx bx-search fs-4 lh-0"></i>
-                                <input
-                                    type="text"
-                                    class="form-control border-0 shadow-none"
-                                    placeholder="Search..."
-                                    aria-label="Search..."
-                                />
-                            </div>
-                        </div>
-                        <!-- /Search -->
+                        
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
                         <!-- User -->
-                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                            <div class="avatar avatar-online">
-                                <img src="assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                            </div>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                    <div class="avatar avatar-online">
-                                        <img src="assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                                    </div>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">John Doe</span>
-                                    <small class="text-muted">Admin</small>
-                                    </div>
-                                </div>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="dropdown-divider"></div>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="auth-login-basic.html">
-                                <i class="bx bx-power-off me-2"></i>
-                                <span class="align-middle">Log Out</span>
-                                </a>
-                            </li>
-                            </ul>
-                        </li>
+                        <%@ include file="user.jsp" %>
                         <!--/ User -->
                         </ul>
                     </div>
@@ -220,7 +178,9 @@
                         <!-- Basic Bootstrap Table -->
                         <div class="card">
                             <h5 class="card-header">Liste des étapes</h5>
-                            <div class="card-body"><a href="form-step" type="button" class="btn btn-success">Ajouter</a></div>
+                            <% if(connected) { %>
+                                <div class="card-body"><a href="form-step" type="button" class="btn btn-success">Ajouter</a></div>
+                            <% } %>
                             <div class="table-responsive text-nowrap" style="overflow-x: visible;">
                                 <table class="table">
                                     <thead>
@@ -229,7 +189,9 @@
                                             <th>ID Recette</th>
                                             <th>Numéro d'étape</th>
                                             <th>Instruction</th>
-                                            <th>Actions</th>
+                                            <% if(connected) { %>
+                                                <th>Actions</th>
+                                            <% } %>
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
@@ -239,23 +201,25 @@
                                                 <td><%= step.getIdRecipe() %></td>
                                                 <td><%= step.getNumber() %></td>
                                                 <td><%= step.getInstructionExcerpt() %></td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="form-step?action=update&id=<%= step.getId() %>">
-                                                                <i class="bx bx-edit-alt me-1"></i>
-                                                                Modifier
-                                                            </a>
-                                                            <a class="dropdown-item" href="step?action=delete&id=<%= step.getId() %>">
-                                                                <i class="bx bx-trash me-1"></i>
-                                                                Supprimer
-                                                            </a>
+                                                <% if(connected) { %>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="form-step?action=update&id=<%= step.getId() %>">
+                                                                    <i class="bx bx-edit-alt me-1"></i>
+                                                                    Modifier
+                                                                </a>
+                                                                <a class="dropdown-item" href="step?action=delete&id=<%= step.getId() %>">
+                                                                    <i class="bx bx-trash me-1"></i>
+                                                                    Supprimer
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
+                                                    </td>
+                                                <% } %>
                                             </tr>
                                         <% } %>
                                     </tbody>

@@ -100,9 +100,19 @@
     - [x] Add action: give an empty form
     - [x] Update action: fill the form with the data to update
 
+### LoginServlet
+- [x] GET:
+    - [x] Disconnect by destroying the session
+- [x] POST:
+    - [x] Connect using session
+
 ### XML webapp
 - [x] Configure the web.xml file
 - [x] Add servlets into web.xml
+
+## Util
+### SessionUtils
+- [x] Function isUserConnected(request)
 
 # Front-end
 ## HTML

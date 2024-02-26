@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,11 +104,20 @@
                 <h4 class="mb-2">Bienvenu dans Gotta taste ! 👋</h4>
                 <p class="mb-4">Veuillez vous connecter à votre compte</p>
   
-                <form id="formAuthentication" class="mb-3" action="" method="POST">
-                  <div class="alert alert-danger alert-dismissible">
-                    Identifiants incorrect
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
+                <form id="formAuthentication" class="mb-3" action="login" method="POST">
+                  <%
+                    String error = request.getParameter("error");
+                    if(error != null) {
+                      if(error.equals("true")) {
+                  %>
+                        <div class="alert alert-danger alert-dismissible">
+                          Identifiants incorrect
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                  <%
+                      }
+                    }
+                  %>
                   <div class="mb-3">
                     <label for="userEmail" class="form-label">Email</label>
                     <input
