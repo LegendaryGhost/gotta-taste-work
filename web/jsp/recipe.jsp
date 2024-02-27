@@ -158,17 +158,21 @@
 
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                         <!-- Search -->
-                        <div class="navbar-nav align-items-center">
-                            <div class="nav-item d-flex align-items-center">
-                                <i class="bx bx-search fs-4 lh-0"></i>
-                                <input
-                                    type="text"
-                                    class="form-control border-0 shadow-none"
-                                    placeholder="Search..."
-                                    aria-label="Search..."
-                                />
+                        <form method="GET" action="recipe" class="navbar-nav align-items-center">
+                            <div class="input-group input-group-merge my-2 me-3">
+                                <span id="search-title-span" class="input-group-text"><i class="bx bx-food-menu"></i></span>
+                                <input name="searchTitle" type="text" class="form-control" id="search-title" placeholder="Titre" aria-label="Titre" aria-describedby="search-title">
                             </div>
-                        </div>
+                            <div class="input-group input-group-merge my-2 me-3">
+                                <span id="search-min-cook-time-span" class="input-group-text"><i class="bx bx-minus"></i></span>
+                                <input name="searchMinCookTime" type="time" class="form-control" id="search-min-cook-time" placeholder="Temps de cuisson" aria-label="Temps de cuisson" aria-describedby="search-min-cook-time">
+                            </div>
+                            <div class="input-group input-group-merge my-2 me-3">
+                                <span id="search-max-cook-time-span" class="input-group-text"><i class="bx bx-plus"></i></span>
+                                <input name="searchMaxCookTime" type="time" class="form-control" id="search-max-cook-time" placeholder="John Doe" aria-label="John Doe" aria-describedby="search-max-cook-time">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Rechercher</button>
+                        </form>
                         <!-- /Search -->
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">

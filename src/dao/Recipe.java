@@ -50,6 +50,68 @@ public class Recipe {
         this.createdDate = createdDate;
     }
 
+    public static ArrayList<Recipe> search(String searchTitle, LocalTime searchMinTime, LocalTime searchMaxTime) throws Exception {
+        ArrayList<Recipe> recipes = new ArrayList<>();
+    
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+    
+        try {
+            connection = DBConnection.getPostgesConnection();
+            
+            // Start building the SQL query
+            StringBuilder sql = new StringBuilder("SELECT * FROM recipe WHERE title ILIKE ?");
+            
+            // Add conditions for searchMinTime and searchMaxTime if they are not null
+            if (searchMinTime != null) {
+                sql.append(" AND cook_time >= ?");
+            }
+            if (searchMaxTime != null) {
+                sql.append(" AND cook_time <= ?");
+            }
+            
+            // Prepare the statement with the dynamically built SQL
+            statement = connection.prepareStatement(sql.toString());
+            
+            // Set the searchTitle parameter
+            statement.setString(1, "%" + searchTitle.toLowerCase() + "%");
+            
+            // Set the searchMinTime and searchMaxTime parameters if they are not null
+            if (searchMinTime != null) {
+                statement.setTime(2, Time.valueOf(searchMinTime));
+            }
+            if (searchMaxTime != null) {
+                int parameterIndex = searchMinTime == null ? 2 : 3;
+                statement.setTime(parameterIndex, Time.valueOf(searchMaxTime));
+            }
+            
+            resultSet = statement.executeQuery();
+    
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id_recipe");
+                String title = resultSet.getString("title");
+                String description = resultSet.getString("recipe_description");
+                int idCategory = resultSet.getInt("id_category");
+                LocalTime cookTime = resultSet.getTime("cook_time").toLocalTime();
+                String createdBy = resultSet.getString("created_by");
+                LocalDate createdDate = resultSet.getDate("created_date").toLocalDate();
+    
+                recipes.add(
+                    new Recipe(id, title, description, idCategory, cookTime, createdBy, createdDate)
+                );
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if (resultSet != null) resultSet.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
+        }
+    
+        return recipes;
+    }
+
     public static ArrayList<Recipe> all() throws Exception {
         ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 

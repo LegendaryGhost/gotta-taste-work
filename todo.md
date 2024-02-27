@@ -77,6 +77,7 @@
 ### RecipeServlet
 - [x] GET:
     - [x] Show recipe list
+    - [x] Multi-criteria search
     - [x] Delete a recipe
 - [x] POSt:
     - [x] Add a new recipe
@@ -129,6 +130,7 @@
 
 ### Recipe
 - [x] Recipe table
+- [x] Multi-criteria search form
 - [x] Recipe form
 
 ### Step
@@ -142,6 +144,7 @@
     - [x] Ingredient table
     - [x] Ingredient form
     - [x] Recipe table
+    - [x] Multi-criteria search form
     - [x] Recipe form
     - [x] Steps table
     - [x] Steps form

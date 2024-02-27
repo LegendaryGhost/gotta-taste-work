@@ -19,6 +19,23 @@ public class RecipeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             String action = req.getParameter("action");
+            String title = req.getParameter("searchTitle");
+            String minTimeStr = req.getParameter("searchMinCookTime");
+            String maxTimeStr = req.getParameter("searchMaxCookTime");
+            LocalTime minTime = null;
+            LocalTime maxTime = null;
+
+            if (title == null) {
+                title = "";
+            }
+
+            if (minTimeStr != null && !minTimeStr.equals("")) {
+                minTime = LocalTime.parse(minTimeStr);
+            }
+
+            if (maxTimeStr != null && !maxTimeStr.equals("")) {
+                maxTime = LocalTime.parse(maxTimeStr);
+            }
 
             if (action != null && action.equals("delete")) {
                 int id = Integer.parseInt(req.getParameter("id"));
@@ -26,7 +43,7 @@ public class RecipeServlet extends HttpServlet {
                 recipe.delete();
             }
 
-            ArrayList<Recipe> recipes = Recipe.all();
+            ArrayList<Recipe> recipes = Recipe.search(title, minTime, maxTime);
             req.setAttribute("recipes", recipes);
             RequestDispatcher dispatcher = req.getRequestDispatcher("recipe.jsp");
             dispatcher.forward(req, resp);
