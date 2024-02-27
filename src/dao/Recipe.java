@@ -249,6 +249,11 @@ public class Recipe {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
+            // Delete all the recipe's ingredient before deleting
+            // the recipe itself
+            RecipeIngredient recipeIngredient = new RecipeIngredient(id);
+            recipeIngredient.deleteFromIdRecipe();
+
             connection = DBConnection.getPostgesConnection();
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(
