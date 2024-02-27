@@ -46,7 +46,7 @@
 
 ## Servlet
 ### LoginServlet
-- [ ] GET: Allow users to login
+- [x] GET: Allow users to login
 
 ### CategoryServlet
 - [x] GET:
