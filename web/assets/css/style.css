@@ -1,3 +1,54 @@
+:root {
+    --orange-yellow: #ff9d00;
+    --transparent-orange-yellow: rgba(255, 157, 0, 0.4);
+    --very-transparent-orange-yellow: rgba(255, 157, 0, 0.16);
+
+    --add-bg-color: #ffbb00;
+    --transparent-add-bg-color: rgba(255, 187, 0, 0.4);
+
+    --input-focus-border: darkgrey;
+}
+
 .fs-10 {
     font-size: 2.6em;
+}
+
+.btn-primary {
+    background-color: var(--orange-yellow);
+    border-color: var(--orange-yellow);
+    box-shadow: 0 0.125rem 0.25rem 0 var(--transparent-orange-yellow);
+}
+
+.btn-primary:hover {
+    background-color: var(--orange-yellow);
+    border-color: var(--orange-yellow);
+}
+
+.btn-success {
+    background-color: var(--add-bg-color);
+    border-color: var(--add-bg-color);
+    box-shadow: 0 0.125rem 0.25rem 0 var(--transparent-add-bg-color);
+}
+
+.btn-success:hover {
+    background-color: var(--add-bg-color);
+    border-color: var(--add-bg-color);
+}
+
+.bg-menu-theme .menu-inner > .menu-item.active > .menu-link {
+    color: var(--orange-yellow);
+    background-color: var(--very-transparent-orange-yellow) !important;
+}
+
+.bg-menu-theme .menu-inner > .menu-item.active:before {
+    background: var(--orange-yellow);
+}
+
+/* Form elements */
+.input-group:focus-within .form-control, .input-group:focus-within .input-group-text {
+    border-color: var(--input-focus-border);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--input-focus-border);
 }
