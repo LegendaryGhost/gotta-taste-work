@@ -13,6 +13,7 @@
     font-size: 2.6em;
 }
 
+/* Redéfinition */
 .btn-primary {
     background-color: var(--orange-yellow);
     border-color: var(--orange-yellow);
@@ -51,4 +52,40 @@
 
 .form-control:focus, .form-select:focus {
     border-color: var(--input-focus-border);
+}
+
+/* Personnalisation */
+.review {
+    box-shadow: none;
+}
+
+.review hr {
+    margin: 0;
+}
+
+.review .update-btn, .review .delete-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.review .update-btn {
+    right: 4rem;
+}
+
+.stars {
+    color: var(--add-bg-color);
+}
+
+.stars-radio i {
+    font-size: 1.7rem;
+    cursor: pointer;
+}
+
+.checked-star::before {
+    content: "\ebac";
+}
+
+.stars-radio input[type=radio] {
+    display: none;
 }

@@ -48,3 +48,14 @@ CREATE TABLE step (
     instruction TEXT NOT NULL,
     FOREIGN KEY (id_recipe) REFERENCES recipe(id_recipe)
 );
+
+CREATE TABLE review (
+    id_review SERIAL PRIMARY KEY,
+    id_user INT NOT NULL,
+    id_recipe INT NOT NULL,
+    rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
+    comment TEXT,
+    review_date DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_user) REFERENCES gotta_taste_user(id_user),
+    FOREIGN KEY (id_recipe) REFERENCES recipe(id_recipe)
+);

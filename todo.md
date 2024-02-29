@@ -7,6 +7,7 @@
 - [x] ingredient (id_ingredient, ingredient_name, unit)
 - [x] recipe_ingredient (id_reipe, id_ingredient, quantity)
 - [x] step (id_step, id_recipe, step_number, instruction)
+- [x] review (id_review, id_user, id_recipe, rating, comment, review_date)
 
 ### Fake data
 - [x] Fill tables with realistic data
@@ -43,6 +44,13 @@
 - [x] Method create
 - [x] Method update
 - [x] Method delete
+
+### Review
+- [ ] Method all
+- [ ] Method find
+- [ ] Method create
+- [ ] Method update
+- [ ] Method delete
 
 ## Servlet
 ### LoginServlet
@@ -101,6 +109,19 @@
     - [x] Add action: give an empty form
     - [x] Update action: fill the form with the data to update
 
+### ReviewServlet
+- [ ] GET:
+    - [ ] Show step list
+    - [ ] Delete a step
+- [ ] POSt:
+    - [ ] Add a new step
+    - [ ] Update a step
+
+### FormReviewServlet
+- [ ] GET:
+    - [ ] Add action: give an empty form
+    - [ ] Update action: fill the form with the data to update
+
 ### LoginServlet
 - [x] GET:
     - [x] Disconnect by destroying the session
@@ -130,12 +151,16 @@
 
 ### Recipe
 - [x] Recipe table
-- [x] Multi-criteria search form
+- [x] Recipe multi-criteria search form
 - [x] Recipe form
 
 ### Step
 - [x] Step table
 - [x] Step form
+
+### Review
+- [x] Review table
+- [x] Review form
 
 ## JSP (Java Server Pages)
 - [x] Convert HTML to JSP
@@ -144,7 +169,9 @@
     - [x] Ingredient table
     - [x] Ingredient form
     - [x] Recipe table
-    - [x] Multi-criteria search form
+    - [x] Recipe multi-criteria search form
     - [x] Recipe form
-    - [x] Steps table
-    - [x] Steps form
+    - [x] Step table
+    - [x] Step form
+    - [ ] Review table
+    - [ ] Review form
