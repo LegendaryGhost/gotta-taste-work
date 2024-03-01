@@ -110,17 +110,17 @@
     - [x] Update action: fill the form with the data to update
 
 ### ReviewServlet
-- [ ] GET:
-    - [ ] Show step list
-    - [ ] Delete a step
-- [ ] POSt:
-    - [ ] Add a new step
-    - [ ] Update a step
+- [x] GET:
+    - [x] Show step list
+    - [x] Delete a step
+- [x] POSt:
+    - [x] Add a new step
+    - [x] Update a step
 
 ### FormReviewServlet
-- [ ] GET:
-    - [ ] Add action: give an empty form
-    - [ ] Update action: fill the form with the data to update
+- [x] GET:
+    - [x] Add action: give an empty form
+    - [x] Update action: fill the form with the data to update
 
 ### LoginServlet
 - [x] GET:

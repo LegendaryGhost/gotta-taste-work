@@ -33,3 +33,9 @@ INSERT INTO step (id_recipe, step_number, instruction) VALUES
     (1,  2, 'Prepare the pizza dough.'),
     (2,  1, 'Preheat the oven to  180°C.'),
     (2,  2, 'Prepare the cake mix according to the instructions on the package.');
+
+-- Insert into the 'review' table
+INSERT INTO review (id_user, id_recipe, rating, comment, review_date) VALUES
+    (1, 1, 4, 'A pertinent comment', '2024-01-30'),
+    (2, 1, 1, 'Another pertinent comment', '2024-02-05'),
+    (3, 2, 5, 'Also a pertinent comment', '2024-02-06');

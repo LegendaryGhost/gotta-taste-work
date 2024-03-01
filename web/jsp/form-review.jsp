@@ -1,9 +1,13 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="dao.Recipe, dao.Review, java.util.ArrayList, util.SessionUtils" %>
+<% boolean connected = SessionUtils.isUserConnected(request); %>
+<% Review review = (Review)request.getAttribute("review"); %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingrédient</title>
+    <title>Retour</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
@@ -71,7 +75,7 @@
                     </li>
 
                     <!-- Ingredient -->
-                    <li class="menu-item active">
+                    <li class="menu-item">
                         <a href="ingredient" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-dish"></i>
                             <div data-i18n="Ingredients">Ingrédients</div>
@@ -85,9 +89,9 @@
                             <div data-i18n="Steps">Etapes</div>
                         </a>
                     </li>
-
+                    
                     <!-- Review -->
-                    <li class="menu-item">
+                    <li class="menu-item active">
                         <a href="review" class="menu-link">
                             <i class="menu-icon tf-icons bx bxs-star-half"></i>
                             <div data-i18n="Reviews">Retours</div>
@@ -115,39 +119,7 @@
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
                         <!-- User -->
-                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                            <div class="avatar avatar-online">
-                                <img src="assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                            </div>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                    <div class="avatar avatar-online">
-                                        <img src="assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                                    </div>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">John Doe</span>
-                                    <small class="text-muted">Admin</small>
-                                    </div>
-                                </div>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="dropdown-divider"></div>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="auth-login-basic.html">
-                                <i class="bx bx-power-off me-2"></i>
-                                <span class="align-middle">Log Out</span>
-                                </a>
-                            </li>
-                            </ul>
-                        </li>
+                        <%@ include file="user.jsp" %>
                         <!--/ User -->
                         </ul>
                     </div>
@@ -158,26 +130,62 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Formulaire /</span> Ingredient</h4>
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Formulaire /</span> Retour</h4>
 
                         <div class="row">
                             <div class="col-lg-6 mx-auto">
                                 <div class="card mb-4">
                                     <div class="card-header d-flex justify-content-between align-items-center">
-                                        <h5 class="mb-0">Ingrédient</h5>
+                                        <h5 class="mb-0">Retour</h5>
                                     </div>
                                     <div class="card-body">
-                                        <form>
-                                            <input type="hidden" name="idIngredient" value="0">
+                                        <form method="POST" action="review">
+                                            <input type="hidden" name="action" value="<%= request.getAttribute("action") %>">
+                                            <input type="hidden" name="idReview" value="<%= review.getId() %>">
+                                            <input type="hidden" name="reviewIdUser" value="<%= review.getIdUser() %>">
                                             <div class="mb-3">
-                                                <label class="form-label" for="ingredientName">Nom</label>
-                                                <input name="ingredientName" type="text" class="form-control" id="ingredientName" placeholder="Nom de la catégorie" />
+                                              <label for="reviewIdRecipe" class="form-label">Plat</label>
+                                              <select name="reviewIdRecipe" id="reviewIdRecipe" class="form-select">
+                                                <%  for(Recipe recipe : (ArrayList<Recipe>)request.getAttribute("recipes")) { %>
+                                                    <option
+                                                        value="<%= recipe.getId() %>"
+                                                        <% if(recipe.getId() == review.getIdRecipe()) out.println("selected"); %>
+                                                    >
+                                                        <%= recipe.getTitle() %>
+                                                    </option>
+                                                <% } %>
+                                              </select>
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label" for="ingredientUnit">Unité de mesure</label>
-                                                <input name="ingredientUnit" type="text" class="form-control" id="ingredientUnit" placeholder="Unité de mesure" />
+                                                <p class="form-label">Note</p>
+                                                <div class="stars stars-radio">
+                                                    <%
+                                                        for(int i = 1; i <= 5; i++) {
+                                                    %>
+                                                        <label for="reviewRating<%= i %>">
+                                                            <i class="bx bx-star"></i>
+                                                            <input
+                                                                type="radio"
+                                                                name="reviewRating"
+                                                                id="reviewRating<%= i %>"
+                                                                value="<%= i %>"
+                                                                <% if(i == review.getRating()) out.println("checked"); %>
+                                                            >
+                                                        </label>
+                                                    <%
+                                                        }
+                                                    %>
+                                                </div>
                                             </div>
-                                            <button type="submit" class="btn btn-success">Ajouter</button>
+                                            <div class="mb-3">
+                                              <label for="reviewComment" class="form-label">Commentaire</label>
+                                              <textarea name="reviewComment" class="form-control" id="reviewComment" rows="3"><%= review.getComment() %></textarea>
+                                            </div>
+                                            <% if(request.getAttribute("action").equals("create")) { %>
+                                                <button type="submit" class="btn btn-success">Ajouter</button>
+                                            <% } else { %>
+                                                <button type="submit" class="btn btn-primary">Modifier</button>
+                                            <% } %>
                                         </form>
                                     </div>
                                 </div>
@@ -211,5 +219,6 @@
 
     <!-- Page JS -->
     <script src="assets/js/dashboards-analytics.js"></script>
+    <script src="assets/js/star-radio.js"></script>
 </body>
 </html>

@@ -14,26 +14,30 @@
 }
 
 /* Redéfinition */
-.btn-primary {
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
     background-color: var(--orange-yellow);
     border-color: var(--orange-yellow);
+}
+
+.btn-primary {
     box-shadow: 0 0.125rem 0.25rem 0 var(--transparent-orange-yellow);
 }
 
-.btn-primary:hover {
-    background-color: var(--orange-yellow);
-    border-color: var(--orange-yellow);
+.btn-primary:focus {
+    border-color: darkgrey;
+}
+
+.btn-success, .btn-success:hover, .btn-success:active, .btn-success:focus {
+    background-color: var(--add-bg-color);
+    border-color: var(--add-bg-color);
 }
 
 .btn-success {
-    background-color: var(--add-bg-color);
-    border-color: var(--add-bg-color);
     box-shadow: 0 0.125rem 0.25rem 0 var(--transparent-add-bg-color);
 }
 
-.btn-success:hover {
-    background-color: var(--add-bg-color);
-    border-color: var(--add-bg-color);
+.btn-success:focus {
+    border-color: darkgrey;
 }
 
 .bg-menu-theme .menu-inner > .menu-item.active > .menu-link {

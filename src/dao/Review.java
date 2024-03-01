@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Review {
@@ -14,6 +15,8 @@ public class Review {
     private int rating = 1;
     private String comment = "";
     private LocalDate date;
+
+    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     
     public Review() {}
 
@@ -21,7 +24,8 @@ public class Review {
         this.id = id;
     }
 
-    public Review(int idUser, int idRecipe, int rating, String comment) {
+    public Review(int id, int idUser, int idRecipe, int rating, String comment) {
+        this.id = id;
         this.idUser = idUser;
         this.idRecipe = idRecipe;
         this.rating = rating;
@@ -196,6 +200,28 @@ public class Review {
         }
     }
 
+    public void deleteFromIdRecipe() throws Exception {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = DBConnection.getPostgesConnection();
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(
+                "DELETE FROM review"
+                + " WHERE id_recipe = ?"
+            );
+            statement.setInt(1, idRecipe);
+            statement.executeUpdate();
+            connection.commit();
+        } catch (Exception e) {
+            connection.rollback();
+            throw e;
+        } finally {
+            statement.close();
+            connection.close();
+        }
+    }
+
     public int getId() {
         return id;
     }
@@ -239,11 +265,13 @@ public class Review {
     public LocalDate getDate() {
         return date;
     }
+
+    public String getFormattedDate() {
+        return date.format(dateFormatter);
+    }
     
     public void setDate(LocalDate date) {
         this.date = date;
     }
-
-    
 
 }

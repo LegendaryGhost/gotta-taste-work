@@ -20,8 +20,8 @@ public class Recipe {
     private String createdBy = "";
     private LocalDate createdDate = LocalDate.now();
 
-    private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public Recipe() {}
 
@@ -253,6 +253,11 @@ public class Recipe {
             // the recipe itself
             RecipeIngredient recipeIngredient = new RecipeIngredient(id);
             recipeIngredient.deleteFromIdRecipe();
+
+            // Delete all the recipe's review
+            Review review = new Review();
+            review.setIdRecipe(id);
+            review.deleteFromIdRecipe();
 
             connection = DBConnection.getPostgesConnection();
             connection.setAutoCommit(false);
