@@ -46,11 +46,11 @@
 - [x] Method delete
 
 ### Review
-- [ ] Method all
-- [ ] Method find
-- [ ] Method create
-- [ ] Method update
-- [ ] Method delete
+- [x] Method all
+- [x] Method find
+- [x] Method create
+- [x] Method update
+- [x] Method delete
 
 ## Servlet
 ### LoginServlet
