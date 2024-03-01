@@ -113,25 +113,13 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                        <!-- Search -->
-                        <form method="GET" action="recipe" class="navbar-nav align-items-center">
-                            <div class="input-group input-group-merge my-2 me-3">
-                                <span id="search-title-span" class="input-group-text"><i class="bx bx-food-menu"></i></span>
-                                <input name="searchTitle" type="text" class="form-control" id="search-title" placeholder="Titre" aria-label="Titre" aria-describedby="search-title">
-                            </div>
-                            <div class="input-group input-group-merge my-2 me-3">
-                                <span id="search-min-cook-time-span" class="input-group-text"><i class="bx bx-minus"></i></span>
-                                <input name="searchMinCookTime" type="time" class="form-control" id="search-min-cook-time" placeholder="Temps de cuisson" aria-label="Temps de cuisson" aria-describedby="search-min-cook-time">
-                            </div>
-                            <div class="input-group input-group-merge my-2 me-3">
-                                <span id="search-max-cook-time-span" class="input-group-text"><i class="bx bx-plus"></i></span>
-                                <input name="searchMaxCookTime" type="time" class="form-control" id="search-max-cook-time" placeholder="John Doe" aria-label="John Doe" aria-describedby="search-max-cook-time">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Rechercher</button>
-                        </form>
-                        <!-- /Search -->
+                        <!-- Search modal button trigger -->
+                        <button type="button" class="btn btn-icon rounded-pill btn-secondary mx-auto me-2" data-bs-toggle="modal" data-bs-target="#searchModal">
+                            <span class="tf-icons bx bx-search"></span>
+                        </button>
+                        <!-- /Search modal button trigger -->
 
-                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                        <ul class="navbar-nav flex-row align-items-center">
 
                         <!-- User -->
                         <%@ include file="user.jsp" %>
@@ -145,6 +133,52 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
+                        <!-- Search modal -->
+                        <div class="modal fade" id="searchModal" tabindex="-1" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Critères de recherche</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="navbar-nav">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="search-title">Titre</label>
+                                                <div class="input-group input-group-merge">
+                                                    <span id="search-title-span" class="input-group-text"><i class="bx bx-food-menu"></i></span>
+                                                    <input name="searchTitle" type="text" class="form-control" id="search-title" placeholder="Titre" aria-label="Titre" aria-describedby="search-title">
+                                                </div>
+                                            </div>
+                                            <div class="row g-2 mb-3">
+                                                <div class="col mb-0">
+                                                    <label class="form-label" for="search-min-cook-time">Temps de préparation minimum</label>
+                                                    <div class="input-group input-group-merge my-2 me-3">
+                                                        <span id="search-min-cook-time-span" class="input-group-text"><i class="bx bx-minus"></i></span>
+                                                        <input name="searchMinCookTime" type="time" class="form-control" id="search-min-cook-time" placeholder="Temps de cuisson" aria-label="Temps de cuisson" aria-describedby="search-min-cook-time">
+                                                    </div>
+                                                </div>
+                                                <div class="col mb-0">
+                                                    <label class="form-label" for="search-max-cook-time">Temps de préparation maximum</label>
+                                                    <div class="input-group input-group-merge my-2 me-3">
+                                                        <span id="search-max-cook-time-span" class="input-group-text"><i class="bx bx-plus"></i></span>
+                                                        <input name="searchMaxCookTime" type="time" class="form-control" id="search-max-cook-time" placeholder="John Doe" aria-label="John Doe" aria-describedby="search-max-cook-time">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer p-0">
+                                                <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                    Annuler
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Rechercher</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Search modal -->
+
                         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gotta taste /</span> Recettes</h4>
 
                         <!-- Basic Bootstrap Table -->
