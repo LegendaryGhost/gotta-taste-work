@@ -123,6 +123,10 @@ public class User {
         this.lastname = lastname;
     }
 
+    public String getFullName() {
+        return firstname + " " + lastname;
+    }
+
     public String getEmail() {
         return email;
     }
