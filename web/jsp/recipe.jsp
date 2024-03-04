@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="dao.Recipe, java.util.ArrayList, util.SessionUtils" %>
+<%@ page import="dao.Recipe, dao.Category, java.util.ArrayList, util.SessionUtils" %>
 <% boolean connected = SessionUtils.isUserConnected(request); %>
 <!DOCTYPE html>
 <html lang="en">
@@ -142,28 +142,48 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="navbar-nav">
+                                        <form method="GET" action="recipe">
                                             <div class="mb-3">
                                                 <label class="form-label" for="search-title">Titre</label>
-                                                <div class="input-group input-group-merge">
-                                                    <span id="search-title-span" class="input-group-text"><i class="bx bx-food-menu"></i></span>
-                                                    <input name="searchTitle" type="text" class="form-control" id="search-title" placeholder="Titre" aria-label="Titre" aria-describedby="search-title">
-                                                </div>
+                                                <input name="searchTitle" type="text" class="form-control" id="search-title" placeholder="Titre" aria-label="Titre" aria-describedby="search-title">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="search-description">Description</label>
+                                                <input name="searchDescription" type="text" class="form-control" id="search-description" placeholder="Description" aria-label="Description" aria-describedby="search-description">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="search-category">Catégorie</label>
+                                                <select name="searchIdCategory" class="form-select" id="search-category" aria-label="Catégorie de recherche">
+                                                    <option selected value="0">Toutes les catégories</option>
+                                                    <%  for(Category category : (ArrayList<Category>)request.getAttribute("categories")) { %>
+                                                        <option value="<%= category.getId() %>">
+                                                            <%= category.getName() %>
+                                                        </option>
+                                                    <% } %>
+                                              </select>
                                             </div>
                                             <div class="row g-2 mb-3">
                                                 <div class="col mb-0">
                                                     <label class="form-label" for="search-min-cook-time">Temps de préparation minimum</label>
-                                                    <div class="input-group input-group-merge my-2 me-3">
-                                                        <span id="search-min-cook-time-span" class="input-group-text"><i class="bx bx-minus"></i></span>
-                                                        <input name="searchMinCookTime" type="time" class="form-control" id="search-min-cook-time" placeholder="Temps de cuisson" aria-label="Temps de cuisson" aria-describedby="search-min-cook-time">
-                                                    </div>
+                                                    <input name="searchMinCookTime" type="time" class="form-control" id="search-min-cook-time" placeholder="Temps de cuisson" aria-label="Temps de cuisson" aria-describedby="search-min-cook-time">
                                                 </div>
                                                 <div class="col mb-0">
                                                     <label class="form-label" for="search-max-cook-time">Temps de préparation maximum</label>
-                                                    <div class="input-group input-group-merge my-2 me-3">
-                                                        <span id="search-max-cook-time-span" class="input-group-text"><i class="bx bx-plus"></i></span>
-                                                        <input name="searchMaxCookTime" type="time" class="form-control" id="search-max-cook-time" placeholder="John Doe" aria-label="John Doe" aria-describedby="search-max-cook-time">
-                                                    </div>
+                                                    <input name="searchMaxCookTime" type="time" class="form-control" id="search-max-cook-time" placeholder="Temps de cuisson" aria-label="Temps de cuisson" aria-describedby="search-max-cook-time">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="search-creator">Créée par</label>
+                                                <input name="searchCreator" type="text" class="form-control" id="search-creator" placeholder="Créateur" aria-label="Créateur" aria-describedby="search-creator">
+                                            </div>
+                                            <div class="row g-2 mb-3">
+                                                <div class="col mb-0">
+                                                    <label class="form-label" for="search-min-creation-date">Date de création minimum</label>
+                                                    <input name="searchMinCreationDate" type="date" class="form-control" id="search-min-creation-date" placeholder="Date de création" aria-label="Date de création" aria-describedby="search-min-creation-date">
+                                                </div>
+                                                <div class="col mb-0">
+                                                    <label class="form-label" for="search-max-creation-date">Date de création maximum</label>
+                                                    <input name="searchMaxCreationDate" type="date" class="form-control" id="search-max-creation-date" placeholder="Date de création" aria-label="Date de création" aria-describedby="search-max-creation-date">
                                                 </div>
                                             </div>
                                             <div class="modal-footer p-0">

@@ -50,7 +50,16 @@ public class Recipe {
         this.createdDate = createdDate;
     }
 
-    public static ArrayList<Recipe> search(String searchTitle, LocalTime searchMinTime, LocalTime searchMaxTime) throws Exception {
+    public static ArrayList<Recipe> search(
+        String searchTitle,
+        String searchDescription,
+        int searchIdCategory,
+        LocalTime minCookTime,
+        LocalTime maxCookTime,
+        String searchCreator,
+        LocalDate minCreationDate,
+        LocalDate maxCreationDate
+    )throws Exception {
         ArrayList<Recipe> recipes = new ArrayList<>();
     
         Connection connection = null;
@@ -61,33 +70,65 @@ public class Recipe {
             connection = DBConnection.getPostgesConnection();
             
             // Start building the SQL query
-            StringBuilder sql = new StringBuilder("SELECT * FROM recipe WHERE title ILIKE ?");
+            StringBuilder sql = new StringBuilder("SELECT * FROM recipe");
+            sql.append(" WHERE title ILIKE ?");
+            sql.append(" AND recipe_description ILIKE ?");
             
-            // Add conditions for searchMinTime and searchMaxTime if they are not null
-            if (searchMinTime != null) {
+            // Add conditions if they are not null
+            if (searchIdCategory != 0) {
+                sql.append(" AND id_category = ?");
+            }
+            if (minCookTime != null) {
                 sql.append(" AND cook_time >= ?");
             }
-            if (searchMaxTime != null) {
+            if (maxCookTime != null) {
                 sql.append(" AND cook_time <= ?");
             }
+
+            sql.append(" AND created_by ILIKE ?");
             
+            if (minCreationDate != null) {
+                sql.append(" AND created_date >= ?");
+            }
+            if (maxCreationDate != null) {
+                sql.append(" AND created_date <= ?");
+            }
+
             // Prepare the statement with the dynamically built SQL
             statement = connection.prepareStatement(sql.toString());
             
-            // Set the searchTitle parameter
-            statement.setString(1, "%" + searchTitle.toLowerCase() + "%");
-            
-            // Set the searchMinTime and searchMaxTime parameters if they are not null
-            if (searchMinTime != null) {
-                statement.setTime(2, Time.valueOf(searchMinTime));
+            // Set the search parameters
+            int paramIndex = 1;
+            statement.setString(paramIndex, "%" + searchTitle.toLowerCase() + "%");
+            paramIndex++;
+            statement.setString(paramIndex, "%" + searchDescription + "%");
+            paramIndex++;
+            if (searchIdCategory != 0) {
+                statement.setInt(paramIndex, searchIdCategory);
+                paramIndex++;
             }
-            if (searchMaxTime != null) {
-                int parameterIndex = searchMinTime == null ? 2 : 3;
-                statement.setTime(parameterIndex, Time.valueOf(searchMaxTime));
+            // Set the searchMinTime and searchMaxTime parameters if they are not null
+            if (minCookTime != null) {
+                statement.setTime(paramIndex, Time.valueOf(minCookTime));
+                paramIndex++;
+            }
+            if (maxCookTime != null) {
+                statement.setTime(paramIndex, Time.valueOf(maxCookTime));
+                paramIndex++;
+            }
+            statement.setString(paramIndex, "%" + searchCreator + "%");
+            paramIndex++;
+            if (minCreationDate != null) {
+                statement.setDate(paramIndex, Date.valueOf(minCreationDate));
+                paramIndex++;
+            }
+            if (maxCreationDate != null) {
+                statement.setDate(paramIndex, Date.valueOf(maxCreationDate));
+                paramIndex++;
             }
             
             resultSet = statement.executeQuery();
-    
+            
             while (resultSet.next()) {
                 int id = resultSet.getInt("id_recipe");
                 String title = resultSet.getString("title");

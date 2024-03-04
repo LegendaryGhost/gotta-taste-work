@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.Category;
 import dao.Recipe;
 
 public class RecipeServlet extends HttpServlet {
@@ -18,33 +19,46 @@ public class RecipeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            ArrayList<Category> categories = Category.all();
             String action = req.getParameter("action");
-            String title = req.getParameter("searchTitle");
-            String minTimeStr = req.getParameter("searchMinCookTime");
-            String maxTimeStr = req.getParameter("searchMaxCookTime");
-            LocalTime minTime = null;
-            LocalTime maxTime = null;
-
-            if (title == null) {
-                title = "";
+            String title = req.getParameter("searchTitle") == null ? "" : req.getParameter("searchTitle");
+            String description = req.getParameter("searchDescription") == null ? "" : req.getParameter("searchDescription");
+            int idCategory = req.getParameter("searchIdCategory") == null ? 0 : Integer.parseInt(req.getParameter("searchIdCategory"));
+            String minCookTimeStr = req.getParameter("searchMinCookTime");
+            String maxCookTimeStr = req.getParameter("searchMaxCookTime");
+            LocalTime minCookTime = null;
+            LocalTime maxCookTime = null;
+            String creator = req.getParameter("searchCreator") == null ? "" : req.getParameter("searchCreator");
+            String minCreationDateStr = req.getParameter("searchMinCreationDate");
+            String maxCreationDateStr = req.getParameter("searchMaxCreationDate");
+            LocalDate minCreationDate = null;
+            LocalDate maxCreationDate = null;
+            
+            if (minCookTimeStr != null && !minCookTimeStr.equals("")) {
+                minCookTime = LocalTime.parse(minCookTimeStr);
             }
-
-            if (minTimeStr != null && !minTimeStr.equals("")) {
-                minTime = LocalTime.parse(minTimeStr);
+            
+            if (maxCookTimeStr != null && !maxCookTimeStr.equals("")) {
+                maxCookTime = LocalTime.parse(maxCookTimeStr);
             }
-
-            if (maxTimeStr != null && !maxTimeStr.equals("")) {
-                maxTime = LocalTime.parse(maxTimeStr);
+            
+            if (minCreationDateStr != null && !minCreationDateStr.equals("")) {
+                minCreationDate = LocalDate.parse(minCreationDateStr);
             }
-
+            
+            if (maxCreationDateStr != null && !maxCreationDateStr.equals("")) {
+                maxCreationDate = LocalDate.parse(maxCreationDateStr);
+            }
+            
             if (action != null && action.equals("delete")) {
                 int id = Integer.parseInt(req.getParameter("id"));
                 Recipe recipe = new Recipe(id);
                 recipe.delete();
             }
 
-            ArrayList<Recipe> recipes = Recipe.search(title, minTime, maxTime);
+            ArrayList<Recipe> recipes = Recipe.search(title, description, idCategory, minCookTime, maxCookTime, creator, minCreationDate, maxCreationDate);
             req.setAttribute("recipes", recipes);
+            req.setAttribute("categories", categories);
             RequestDispatcher dispatcher = req.getRequestDispatcher("recipe.jsp");
             dispatcher.forward(req, resp);
         } catch (Exception e) {
