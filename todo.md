@@ -27,6 +27,7 @@
 ### Recipe
 - [x] Method all
 - [x] Method find
+- [x] Method search
 - [x] Method create
 - [x] Method update
 - [x] Method delete
@@ -34,6 +35,7 @@
 ### Step
 - [x] Method all
 - [x] Method find
+- [ ] Method search
 - [x] Method create
 - [x] Method update
 - [x] Method delete
@@ -41,6 +43,7 @@
 ### Ingredient
 - [x] Method all
 - [x] Method find
+- [ ] Method search
 - [x] Method create
 - [x] Method update
 - [x] Method delete
@@ -48,6 +51,7 @@
 ### Review
 - [x] Method all
 - [x] Method find
+- [ ] Method search
 - [x] Method create
 - [x] Method update
 - [x] Method delete
@@ -173,5 +177,5 @@
     - [x] Recipe form
     - [x] Step table
     - [x] Step form
-    - [ ] Review table
-    - [ ] Review form
+    - [x] Review table
+    - [x] Review form
