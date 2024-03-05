@@ -70,6 +70,84 @@ public class Step {
         return steps;
     }
 
+    public static ArrayList<Step> search(
+        int searchIdRecipe,
+        int minStepNumber,
+        int maxStepNumber,
+        String searchInstruction
+    ) throws Exception {
+        ArrayList<Step> steps = new ArrayList<Step>();
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getPostgesConnection();
+
+            // Start building the SQL query
+            StringBuilder sql = new StringBuilder("SELECT * FROM step");
+            sql.append(" WHERE instruction ILIKE ?");
+            
+            // Add conditions if they are not null
+            if (searchIdRecipe != 0) {
+                sql.append(" AND id_recipe = ?");
+            }
+            if (minStepNumber != 0) {
+                sql.append(" AND step_number >= ?");
+            }
+            if (maxStepNumber != 0) {
+                sql.append(" AND step_number <= ?");
+            }
+
+            statement = connection.prepareStatement(
+                sql.toString()
+            );
+
+            // Set the search parameters
+            int paramIndex = 1;
+            statement.setString(paramIndex, "%" + searchInstruction + "%");
+            paramIndex++;
+            if (searchIdRecipe != 0) {
+                statement.setInt(paramIndex, searchIdRecipe);
+                paramIndex++;
+            }
+            if (minStepNumber != 0) {
+                statement.setInt(paramIndex, minStepNumber);
+                paramIndex++;
+            }
+            if (maxStepNumber != 0) {
+                statement.setInt(paramIndex, maxStepNumber);
+                paramIndex++;
+            }
+            
+            resultSet = statement.executeQuery();
+
+            int id;
+            int idRecipe;
+            int number;
+            String instruction;
+            while (resultSet.next()) {
+                id = resultSet.getInt("id_step");
+                idRecipe = resultSet.getInt("id_recipe");
+                number = resultSet.getInt("step_number");
+                instruction = resultSet.getString("instruction");
+
+                steps.add(
+                    new Step(id, idRecipe, number, instruction)
+                );
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            resultSet.close();
+            statement.close();
+            connection.close();
+        }
+
+        return steps;
+    }
+
     public void find() throws Exception {
         Connection connection = null;
         PreparedStatement statement = null;

@@ -11,6 +11,8 @@ public class Ingredient {
     private String name = "";
     private String unit = "";
 
+    public Ingredient() {}
+    
     public Ingredient(int id) {
         this.id = id;
     }
@@ -26,10 +28,6 @@ public class Ingredient {
         this.unit = unit;
     }
 
-    public Ingredient() {
-        //TODO Auto-generated constructor stub
-    }
-
     public static ArrayList<Ingredient> all() throws Exception {
         ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
 
@@ -42,6 +40,60 @@ public class Ingredient {
             statement = connection.prepareStatement(
                 "SELECT * FROM ingredient"
             );
+            resultSet = statement.executeQuery();
+
+            int id;
+            String name;
+            String unit;
+            while (resultSet.next()) {
+                id = resultSet.getInt("id_ingredient");
+                name = resultSet.getString("ingredient_name");
+                unit = resultSet.getString("unit");
+
+                ingredients.add(
+                    new Ingredient(id, name, unit)
+                );
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            resultSet.close();
+            statement.close();
+            connection.close();
+        }
+
+        return ingredients;
+    }
+
+    public static ArrayList<Ingredient> search(
+        String searchName,
+        String searchUnit
+    ) throws Exception {
+        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getPostgesConnection();
+
+            // Start building the SQL query
+            StringBuilder sql = new StringBuilder("SELECT * FROM ingredient");
+            sql.append(" WHERE ingredient_name ILIKE ?");
+            sql.append(" AND unit ILIKE ?");
+
+            statement = connection.prepareStatement(
+                sql.toString()
+            );
+
+            // Set the search parameters
+            int paramIndex = 1;
+            statement.setString(paramIndex, "%" + searchName + "%");
+            paramIndex++;
+            statement.setString(paramIndex, "%" + searchUnit + "%");
+            paramIndex++;
+
             resultSet = statement.executeQuery();
 
             int id;

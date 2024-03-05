@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -61,6 +62,104 @@ public class Review {
             statement = connection.prepareStatement(
                 "SELECT * FROM review"
             );
+            resultSet = statement.executeQuery();
+
+            int id;
+            int idUser;
+            int idRecipe;
+            int rating;
+            String comment;
+            LocalDate date;
+            while (resultSet.next()) {
+                id = resultSet.getInt("id_review");
+                idUser = resultSet.getInt("id_user");
+                idRecipe = resultSet.getInt("id_recipe");
+                rating = resultSet.getInt("rating");
+                comment = resultSet.getString("comment");
+                date = resultSet.getDate("review_date").toLocalDate();
+
+                reviews.add(
+                    new Review(id, idUser, idRecipe, rating, comment, date)
+                );
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            resultSet.close();
+            statement.close();
+            connection.close();
+        }
+
+        return reviews;
+    }
+
+    public static ArrayList<Review> search(
+        int searchIdUser,
+        int searchIdRecipe,
+        int minRating,
+        int maxRating,
+        String searchComment,
+        LocalDate minDate,
+        LocalDate maxDate
+    ) throws Exception {
+        ArrayList<Review> reviews = new ArrayList<Review>();
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getPostgesConnection();
+
+            // Start building the SQL query
+            StringBuilder sql = new StringBuilder("SELECT * FROM review");
+            sql.append(" WHERE comment ILIKE ?");
+            sql.append(" AND rating >= ?");
+            sql.append(" AND rating <= ?");
+            
+            // Add conditions if they are not null
+            if (searchIdUser != 0) {
+                sql.append(" AND id_user = ?");
+            }
+            if (searchIdRecipe != 0) {
+                sql.append(" AND id_recipe = ?");
+            }
+            if (minDate != null) {
+                sql.append(" AND cook_time >= ?");
+            }
+            if (maxDate != null) {
+                sql.append(" AND cook_time <= ?");
+            }
+
+            statement = connection.prepareStatement(
+                sql.toString()
+            );
+
+            // Set the search parameters
+            int paramIndex = 1;
+            statement.setString(paramIndex, "%" + searchComment + "%");
+            paramIndex++;
+            statement.setInt(paramIndex, minRating);
+            paramIndex++;
+            statement.setInt(paramIndex, maxRating);
+            paramIndex++;
+            if (searchIdUser != 0) {
+                statement.setInt(paramIndex, searchIdUser);
+                paramIndex++;
+            }
+            if (searchIdRecipe != 0) {
+                statement.setInt(paramIndex, searchIdRecipe);
+                paramIndex++;
+            }
+            if (minDate != null) {
+                statement.setDate(paramIndex, Date.valueOf(minDate));
+                paramIndex++;
+            }
+            if (maxDate != null) {
+                statement.setDate(paramIndex, Date.valueOf(maxDate));
+                paramIndex++;
+            }
+
             resultSet = statement.executeQuery();
 
             int id;
