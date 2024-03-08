@@ -19,8 +19,16 @@ public class RecipeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            ArrayList<Category> categories = Category.all();
             String action = req.getParameter("action");
+            
+            if (action != null && action.equals("delete")) {
+                int id = Integer.parseInt(req.getParameter("id"));
+                Recipe recipe = new Recipe(id);
+                recipe.delete();
+            }
+
+            ArrayList<Category> categories = Category.all();
+            
             String title = req.getParameter("searchTitle") == null ? "" : req.getParameter("searchTitle");
             String description = req.getParameter("searchDescription") == null ? "" : req.getParameter("searchDescription");
             int idCategory = req.getParameter("searchIdCategory") == null ? 0 : Integer.parseInt(req.getParameter("searchIdCategory"));
@@ -48,12 +56,6 @@ public class RecipeServlet extends HttpServlet {
             
             if (maxCreationDateStr != null && !maxCreationDateStr.equals("")) {
                 maxCreationDate = LocalDate.parse(maxCreationDateStr);
-            }
-            
-            if (action != null && action.equals("delete")) {
-                int id = Integer.parseInt(req.getParameter("id"));
-                Recipe recipe = new Recipe(id);
-                recipe.delete();
             }
 
             ArrayList<Recipe> recipes = Recipe.search(title, description, idCategory, minCookTime, maxCookTime, creator, minCreationDate, maxCreationDate);

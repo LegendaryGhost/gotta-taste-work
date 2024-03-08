@@ -14,6 +14,7 @@
 
 ## DAO
 ### User
+- [x] Method all
 - [x] Method create
 - [x] Method findByEmailAndPassword
 
@@ -35,7 +36,7 @@
 ### Step
 - [x] Method all
 - [x] Method find
-- [ ] Method search
+- [x] Method search
 - [x] Method create
 - [x] Method update
 - [x] Method delete
@@ -43,7 +44,7 @@
 ### Ingredient
 - [x] Method all
 - [x] Method find
-- [ ] Method search
+- [x] Method search
 - [x] Method create
 - [x] Method update
 - [x] Method delete
@@ -51,7 +52,7 @@
 ### Review
 - [x] Method all
 - [x] Method find
-- [ ] Method search
+- [x] Method search
 - [x] Method create
 - [x] Method update
 - [x] Method delete
@@ -171,11 +172,14 @@
     - [x] Category table
     - [x] Category form
     - [x] Ingredient table
+    - [ ] Ingredient multi-criteria search form
     - [x] Ingredient form
     - [x] Recipe table
     - [x] Recipe multi-criteria search form
     - [x] Recipe form
     - [x] Step table
+    - [ ] Step multi-criteria search form
     - [x] Step form
     - [x] Review table
+    - [x] Review multi-criteria search form
     - [x] Review form

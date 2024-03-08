@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class User {
 
@@ -25,6 +26,55 @@ public class User {
         this.lastname = lastname;
         this.email = email;
         setPassword(password);
+    }
+
+    public User(int id, String firstname, String lastname, String email, String password) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        setPassword(password);
+    }
+
+    public static ArrayList<User> all() throws Exception {
+        ArrayList<User> users = new ArrayList<User>();
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getPostgesConnection();
+            statement = connection.prepareStatement(
+                "SELECT * FROM gotta_taste_user"
+            );
+            resultSet = statement.executeQuery();
+
+            int id;
+            String firstname;
+            String lastname;
+            String email;
+            String password;
+            while (resultSet.next()) {
+                id = resultSet.getInt("id_user");
+                firstname = resultSet.getString("firstname");
+                lastname = resultSet.getString("lastname");
+                email = resultSet.getString("email");
+                password = resultSet.getString("user_password");
+
+                users.add(
+                    new User(id, firstname, lastname, email, password)
+                );
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            resultSet.close();
+            statement.close();
+            connection.close();
+        }
+
+        return users;
     }
 
     public void create() throws Exception {

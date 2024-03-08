@@ -125,10 +125,10 @@ public class Review {
                 sql.append(" AND id_recipe = ?");
             }
             if (minDate != null) {
-                sql.append(" AND cook_time >= ?");
+                sql.append(" AND review_date >= ?");
             }
             if (maxDate != null) {
-                sql.append(" AND cook_time <= ?");
+                sql.append(" AND review_date <= ?");
             }
 
             statement = connection.prepareStatement(

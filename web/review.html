@@ -110,16 +110,19 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                        <!-- Search -->
-                        <!-- /Search -->
+                        <!-- Search modal button trigger -->
+                        <button type="button" class="btn btn-icon rounded-pill btn-secondary mx-auto me-2" data-bs-toggle="modal" data-bs-target="#searchModal">
+                            <span class="tf-icons bx bx-search"></span>
+                        </button>
+                        <!-- /Search modal button trigger -->
 
-                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                        <ul class="navbar-nav flex-row align-items-center">
 
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                            <div class="avatar avatar-online">
-                                <i class="bx bx-user-circle w-100 h-100 fs-3em"></i>
+                            <div class="d-flex align-items-center avatar avatar-online">
+                                <i class="bx bx-user-circle fs-3em"></i>
                             </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -127,8 +130,8 @@
                                 <a class="dropdown-item" href="#">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
-                                    <div class="avatar avatar-online">
-                                        <i class="bx bx-user-circle w-100 h-100 fs-3em"></i>
+                                    <div class="d-flex align-items-center avatar avatar-online">
+                                        <i class="bx bx-user-circle fs-3em"></i>
                                     </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -165,6 +168,113 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
+                        <!-- Search modal -->
+                        <div class="modal fade" id="searchModal" tabindex="-1" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel1">Critères de recherche</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="search-user">Utilisateur</label>
+                                                <select name="searchIdUser" class="form-select" id="search-user" aria-label="Utilisateur">
+                                                    <option selected value="0">Tous les utilisateurs</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="search-recipe">Recette</label>
+                                                <select name="searchIdUser" class="form-select" id="search-recipe" aria-label="Utilisateur">
+                                                    <option selected value="0">Toutes les recettes</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                            <div class="row g-2 mb-3">
+                                                <div class="col mb-0">
+                                                    <p class="form-label">Note minimum</p>
+                                                    <div class="stars stars-radio">
+                                                        <label for="searchMinMark1">
+                                                            <i class="bx bx-star"></i>
+                                                            <input type="radio" name="searchMinMark" id="searchMinMark1" value="1" checked>
+                                                        </label>
+                                                        <label for="searchMinMark2">
+                                                            <i class="bx bx-star"></i>
+                                                            <input type="radio" name="searchMinMark" id="searchMinMark2" value="2">
+                                                        </label>
+                                                        <label for="searchMinMark3">
+                                                            <i class="bx bx-star"></i>
+                                                            <input type="radio" name="searchMinMark" id="searchMinMark3" value="3">
+                                                        </label>
+                                                        <label for="searchMinMark4">
+                                                            <i class="bx bx-star"></i>
+                                                            <input type="radio" name="searchMinMark" id="searchMinMark4" value="4">
+                                                        </label>
+                                                        <label for="searchMinMark5">
+                                                            <i class="bx bx-star"></i>
+                                                            <input type="radio" name="searchMinMark" id="searchMinMark5" value="5">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col mb-0">
+                                                    <p class="form-label">Note maximum</p>
+                                                    <div class="stars stars-radio">
+                                                        <label for="searchMaxMark1">
+                                                            <i class="bx bx-star"></i>
+                                                            <input type="radio" name="searchMaxMark" id="searchMaxMark1" value="1">
+                                                        </label>
+                                                        <label for="searchMaxMark2">
+                                                            <i class="bx bx-star"></i>
+                                                            <input type="radio" name="searchMaxMark" id="searchMaxMark2" value="2">
+                                                        </label>
+                                                        <label for="searchMaxMark3">
+                                                            <i class="bx bx-star"></i>
+                                                            <input type="radio" name="searchMaxMark" id="searchMaxMark3" value="3">
+                                                        </label>
+                                                        <label for="searchMaxMark4">
+                                                            <i class="bx bx-star"></i>
+                                                            <input type="radio" name="searchMaxMark" id="searchMaxMark4" value="4">
+                                                        </label>
+                                                        <label for="searchMaxMark5">
+                                                            <i class="bx bx-star"></i>
+                                                            <input type="radio" name="searchMaxMark" id="searchMaxMark5" value="5" checked>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="search-comment">Commentaire</label>
+                                                <input name="searchComment" type="text" class="form-control" id="search-comment" placeholder="Commentaire" aria-label="Commentaire" aria-describedby="search-comment">
+                                            </div>
+                                            <div class="row g-2 mb-3">
+                                                <div class="col mb-0">
+                                                    <label class="form-label" for="search-min-date">Date de création minimum</label>
+                                                    <input name="searchMinDate" type="date" class="form-control" id="search-min-date" placeholder="Date de création" aria-label="Date de création" aria-describedby="search-min-date">
+                                                </div>
+                                                <div class="col mb-0">
+                                                    <label class="form-label" for="search-max-date">Date de création maximum</label>
+                                                    <input name="searchMaxDate" type="date" class="form-control" id="search-max-date" placeholder="Date de création" aria-label="Date de création" aria-describedby="search-max-date">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer p-0">
+                                                <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                    Annuler
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Rechercher</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Search modal -->
+
                         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gotta taste /</span> Retours</h4>
 
                         <!-- Basic Bootstrap Table -->
@@ -259,5 +369,6 @@
 
     <!-- Page JS -->
     <script src="assets/js/dashboards-analytics.js"></script>
+    <script src="assets/js/star-radio.js"></script>
 </body>
 </html>
